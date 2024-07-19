@@ -18,6 +18,18 @@
         "type": "github"
       }
     },
+    "nand2tetris-tools-zip": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-Prtvoxm740O20TdG8AMigtVpRmXHBsOlbrm77lZZpA8=",
+        "type": "file",
+        "url": "https://drive.google.com/uc?export=download&id=1xZzcMIUETv3u3sdpM_oTJSTetpVee3KZ"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://drive.google.com/uc?export=download&id=1xZzcMIUETv3u3sdpM_oTJSTetpVee3KZ"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1714912032,
@@ -37,6 +49,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "nand2tetris-tools-zip": "nand2tetris-tools-zip",
         "nixpkgs": "nixpkgs"
       }
     },

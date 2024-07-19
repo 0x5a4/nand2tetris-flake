@@ -4,11 +4,16 @@
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    nand2tetris-tools-zip = {
+      url = "file+https://drive.google.com/uc?export=download&id=1xZzcMIUETv3u3sdpM_oTJSTetpVee3KZ";
+      flake = false;
+    };
   };
 
   outputs = {
     self,
     flake-utils,
+    nand2tetris-tools-zip,
     nixpkgs,
   }:
     flake-utils.lib.eachDefaultSystem (
@@ -18,19 +23,17 @@
         packages = rec {
           nand2tetristools-unwrapped = pkgs.stdenv.mkDerivation {
             name = "nand2tetristools";
-            src = builtins.fetchTarball {
-              url = "https://drive.google.com/uc?export=download&id=1xZzcMIUETv3u3sdpM_oTJSTetpVee3KZ";
-              sha256 = "sha256:0n31p1kn4by3wmf1wqf40q7wnywxr8b1nxi49y9d08nniiricc3s";
-            };
 
-            outputs = ["out" "doc"];
+            unpackPhase = ''
+              ${pkgs.unzip}/bin/unzip ${nand2tetris-tools-zip}
+            '';
 
             installPhase = ''
-              cd tools
+              cd nand2tetris/tools
               rm -r *.bat
 
               mkdir -p $out/bin
-              mv bin/help $doc
+              
               cp -r ./* $out/bin
               chmod +x $out/bin/*.sh
             '';
