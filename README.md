@@ -13,7 +13,7 @@ Add `nand2tetris` to your `flake.nix`:
  
 ```nix
 {
-  inputs.nand2tetris.url = "https://flakehub.com/f/0x5a4/nand2tetris-flake/*.tar.gz";
+  inputs.nand2tetris.url = "github:0x5a4/nand2tetris-flake";
  
   outputs = { self, nand2tetris }: {
     # Use in your outputs

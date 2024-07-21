@@ -22,7 +22,7 @@
       in rec {
         packages = rec {
           nand2tetristools-unwrapped = pkgs.stdenv.mkDerivation {
-            name = "nand2tetristools";
+            name = "nand2tetristools-unwrapped";
 
             unpackPhase = ''
               ${pkgs.unzip}/bin/unzip ${nand2tetris-tools-zip}
@@ -54,33 +54,33 @@
               wrapProgram $out/bin/JackCompiler.sh --prefix PATH : $out/lib/openjdk/bin 
             '';
           };
-        };
 
-        defaultPackage = packages.nand2tetristools;
+          default = nand2tetristools;
+        };
 
         apps = {
           hardwaresimulator = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             exePath = "/bin/HardwareSimulator.sh";
           };
 
           cpusimulator = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             exePath = "/bin/CPUEmulator.sh";
           };
 
           assembler = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             exePath = "/bin/Assembler.sh";
           };
 
           vmemulator = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             exePath = "/bin/VMEmulator.sh";
           };
 
           jackcompiler = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             exePath = "/bin/JackCompiler.sh";
           };
         };
